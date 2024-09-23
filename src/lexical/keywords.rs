@@ -1,6 +1,5 @@
-use std::collections::HashMap;
-
 use super::TokenType;
+use std::collections::HashMap;
 
 pub struct Keywords<'a> {
     hashmap: std::collections::HashMap<&'a str, TokenType>,

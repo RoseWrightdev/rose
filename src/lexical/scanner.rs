@@ -1,10 +1,9 @@
-use std::cell::RefCell;
-use std::rc::Rc;
-
 use super::Keywords;
+use crate::lexical::Literal;
 use crate::lexical::Token;
 use crate::lexical::TokenType;
-use crate::lexical::Literal;
+use std::cell::RefCell;
+use std::rc::Rc;
 
 use crate::throw::{self, E};
 
@@ -248,14 +247,14 @@ impl<'a> Scanner<'a> {
 
             // string literal
             '"' => self.string(),
-            
+
             // whitespace
             ' ' | '\r' | '\t' | '\n' => {
                 // Ignore whitespace
                 if *c == '\n' {
                     self.line += 1;
                 }
-        }
+            }
             _ => {
                 if self.is_digit(*c) {
                     self.number()

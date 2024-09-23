@@ -1,6 +1,5 @@
-use std::{cell::RefCell, env, fs, rc::Rc};
-
 use lexical::Keywords;
+use std::{cell::RefCell, env, fs, rc::Rc};
 mod lexical;
 mod throw;
 
@@ -18,13 +17,12 @@ fn main() {
 }
 
 fn run_file(source: &str) {
-    //init 
+    //init
     let errors = Rc::new(RefCell::new(throw::E::new()));
     let mut scanner = lexical::Scanner::new(source, Rc::clone(&errors), Keywords::new());
 
     scanner.run();
     scanner.print();
-
 
     // Check for errors after running the scanner
     throw::check_errors(&errors.borrow());
