@@ -30,7 +30,13 @@ impl<'a> Scanner<'a> {
 
     pub fn run(&mut self) {
         self.scan_tokens();
-        println!("{:?}", self.tokens);
+    }
+
+    pub fn print(&self) {
+        println!("\n");
+        for t in &self.tokens {
+            println!("{:?}", t);
+        }
     }
 
     // context

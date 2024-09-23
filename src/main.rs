@@ -18,10 +18,13 @@ fn main() {
 }
 
 fn run_file(source: &str) {
+    //init 
     let errors = Rc::new(RefCell::new(throw::E::new()));
-    let keywords = Keywords::new();
-    let mut scanner = lexical::Scanner::new(source, Rc::clone(&errors), keywords);
+    let mut scanner = lexical::Scanner::new(source, Rc::clone(&errors), Keywords::new());
+
     scanner.run();
+    scanner.print();
+
 
     // Check for errors after running the scanner
     throw::check_errors(&errors.borrow());
