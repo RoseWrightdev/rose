@@ -83,14 +83,16 @@ impl<'a> Scanner<'a> {
     fn string(&mut self) {
         while self.peek() != '"' && !self.is_at_end() {
             if self.peek() == '\n' {
-                self.line += 1
+                self.line += 1;
             }
+            self.advance();
         }
 
         if self.is_at_end() {
             self.throw
                 .borrow_mut()
                 .error(self.line, "Unterminated string.");
+            return;
         }
 
         self.advance();
@@ -237,6 +239,14 @@ impl<'a> Scanner<'a> {
 
             // string literal
             '"' => self.string(),
+            
+            // whitespace
+            ' ' | '\r' | '\t' | '\n' => {
+                // Ignore whitespace
+                if *c == '\n' {
+                    self.line += 1;
+                }
+        }
             _ => {
                 if self.is_digit(*c) {
                     self.number()

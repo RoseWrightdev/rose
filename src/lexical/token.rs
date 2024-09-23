@@ -31,11 +31,10 @@ impl fmt::Debug for Token {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
-            "Token: {:?}
+            "\nToken: {:?}
             text: {:#?}
             literal: {:?}
-            line: {:?}
-            ",
+            line: {:?}\n",
             self.token_type, self.text, self.literal, self.line
         )
     }
