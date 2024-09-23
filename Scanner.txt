@@ -1,4 +1,5 @@
 var hello_world = () => {
     print("hello_world")
     //pretty cool :P
+    var number = 100.0
 }

@@ -1,3 +1,5 @@
+use std::fmt::Debug;
+
 #[derive(Debug, Clone)]
 pub enum TokenType {
     // Single-character tokens.
@@ -52,5 +54,19 @@ pub enum TokenType {
 impl Default for TokenType {
     fn default() -> Self {
         TokenType::EndOfFile
+    }
+}
+
+pub enum Literal {
+    String(String),
+    Number(f64),
+}
+
+impl Debug for Literal {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Literal::String(s) => write!(f, "{}", s),
+            Literal::Number(n) => write!(f, "{}", n),
+        }
     }
 }

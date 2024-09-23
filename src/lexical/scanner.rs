@@ -4,6 +4,8 @@ use std::rc::Rc;
 use super::Keywords;
 use crate::lexical::Token;
 use crate::lexical::TokenType;
+use crate::lexical::Literal;
+
 use crate::throw::{self, E};
 
 pub struct Scanner<'a> {
@@ -102,7 +104,7 @@ impl<'a> Scanner<'a> {
             .skip(self.start + 1)
             .take(self.current - self.start - 2)
             .collect();
-        self.add_token(TokenType::String, Some(&value));
+        self.add_token(TokenType::String, Some(Literal::String(value)));
     }
 
     //number
@@ -127,25 +129,26 @@ impl<'a> Scanner<'a> {
         self.add_token(
             TokenType::Number,
             Some(
-                &value
-                    .parse::<String>()
+                value
+                    .parse::<f64>()
+                    .map(Literal::Number)
                     .expect("Failed to parse number literal."),
             ),
         );
     }
 
     // token management
-    fn add_token(&mut self, token_type: TokenType, literal: Option<&str>) {
+    fn add_token(&mut self, token_type: TokenType, literal: Option<Literal>) {
         let text: &str = &self.source[self.start..self.current];
 
         match literal {
             Some(literal) => {
                 self.tokens
-                    .push(Token::new(token_type, Some(literal), text, &self.line));
+                    .push(Token::new(token_type, Some(literal), text, self.line));
             }
             None => {
                 self.tokens
-                    .push(Token::new(token_type, None, text, &self.line));
+                    .push(Token::new(token_type, None, text, self.line));
             }
         }
     }
