@@ -9,7 +9,7 @@ fn main() {
         panic!("Error: no arguments found.")
     }
     let source_path = &args[1];
-    print!("source path: {}", source_path);
+    println!("source path: {}", source_path);
     let source = fs::read_to_string(source_path)
         .unwrap_or_else(|_| panic!("unable to read from source_path: {}", source_path));
 
