@@ -1,5 +1,5 @@
 use super::Keywords;
-use crate::lexical::Literal;
+use crate::lexical::AlphanumericLiteral;
 use crate::lexical::Token;
 use crate::lexical::TokenType;
 use std::cell::RefCell;
@@ -109,7 +109,7 @@ impl<'a> Scanner<'a> {
             .skip(self.start + 1)
             .take(self.current - self.start - 2)
             .collect();
-        self.add_token(TokenType::String, Some(Literal::String(value)));
+        self.add_token(TokenType::String, Some(AlphanumericLiteral::String(value)));
     }
 
     //number
@@ -136,14 +136,14 @@ impl<'a> Scanner<'a> {
             Some(
                 value
                     .parse::<f64>()
-                    .map(Literal::Number)
+                    .map(AlphanumericLiteral::Number)
                     .expect("Failed to parse number literal."),
             ),
         );
     }
 
     // token management
-    fn add_token(&mut self, token_type: TokenType, literal: Option<Literal>) {
+    fn add_token(&mut self, token_type: TokenType, literal: Option<AlphanumericLiteral>) {
         let text: &str = &self.source[self.start..self.current];
 
         match literal {

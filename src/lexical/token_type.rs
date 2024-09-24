@@ -54,16 +54,16 @@ pub enum TokenType {
 }
 
 
-pub enum Literal {
+pub enum AlphanumericLiteral {
     String(String),
     Number(f64),
 }
 
-impl Debug for Literal {
+impl Debug for AlphanumericLiteral {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Literal::String(s) => write!(f, "{}", s),
-            Literal::Number(n) => write!(f, "{}", n),
+            AlphanumericLiteral::String(s) => write!(f, "{}", s),
+            AlphanumericLiteral::Number(n) => write!(f, "{}", n),
         }
     }
 }

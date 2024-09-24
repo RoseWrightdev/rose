@@ -1,4 +1,4 @@
-use crate::lexical::Literal;
+use crate::lexical::AlphanumericLiteral;
 use crate::lexical::TokenType;
 use std::fmt;
 
@@ -9,7 +9,7 @@ pub struct Token {
 }
 
 impl Token {
-    pub fn new(token_type: TokenType, _literal: Option<Literal>, text: &str, line: usize) -> Self {
+    pub fn new(token_type: TokenType, _literal: Option<AlphanumericLiteral>, text: &str, line: usize) -> Self {
         Self {
             token_type,
             text: text.to_string(),
