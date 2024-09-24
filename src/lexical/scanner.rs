@@ -114,7 +114,7 @@ impl<'a> Scanner<'a> {
 
     //number
     fn is_digit(&self, c: char) -> bool {
-        c >= '0' && c <= '9'
+        c.is_ascii_digit()
     }
 
     fn number(&mut self) {
@@ -178,7 +178,7 @@ impl<'a> Scanner<'a> {
     }
 
     fn is_alpha(&self, c: char) -> bool {
-        (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_'
+        ('a'..='z').contains(&c) || ('A'..='Z').contains(&c) || c == '_'
     }
 
     fn is_alpha_numeric(&self, c: char) -> bool {
@@ -236,7 +236,7 @@ impl<'a> Scanner<'a> {
             }
             '/' => {
                 // check for comments
-                let _ = if self.match_token('/') {
+                if self.match_token('/') {
                     while self.peek() != '\n' && !self.is_at_end() {
                         self.advance();
                     }

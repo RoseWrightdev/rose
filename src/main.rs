@@ -5,13 +5,13 @@ mod throw;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    if args.len() < 1 {
+    if args.is_empty() {
         panic!("Error: no arguments found.")
     }
     let source_path = &args[1];
     print!("source path: {}", source_path);
     let source = fs::read_to_string(source_path)
-        .expect(&format!("unable to read from source_path: {}", source_path));
+        .unwrap_or_else(|_| panic!("unable to read from source_path: {}", source_path));
 
     run_file(&source);
 }

@@ -1,6 +1,7 @@
 use std::fmt::Debug;
 
 #[derive(Debug, Clone)]
+#[derive(Default)]
 pub enum TokenType {
     // Single-character tokens.
     LeftParen,
@@ -48,14 +49,10 @@ pub enum TokenType {
     Var,
     While,
 
+    #[default]
     EndOfFile,
 }
 
-impl Default for TokenType {
-    fn default() -> Self {
-        TokenType::EndOfFile
-    }
-}
 
 pub enum Literal {
     String(String),

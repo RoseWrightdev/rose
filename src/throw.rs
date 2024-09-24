@@ -11,11 +11,10 @@ impl E {
         }
     }
 
-    pub fn error(&mut self, line: usize, message: &str) -> () {
+    pub fn error(&mut self, line: usize, message: &str) {
         let error = format!("[{}] Error: {}", line, message);
         self.list.push(error);
         self.has_error = true;
-        ()
     }
 
     pub fn check_errors(&self) {
