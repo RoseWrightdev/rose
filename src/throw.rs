@@ -1,10 +1,10 @@
 #[derive(Default)]
-pub struct E {
+pub struct Error {
     list: Vec<String>,
     has_error: bool,
 }
 
-impl E {
+impl Error {
     pub fn new() -> Self {
         Self {
             ..Default::default()
@@ -26,6 +26,6 @@ impl E {
     }
 }
 
-pub fn check_errors(errors: &E) {
+pub fn check_errors(errors: &Error) {
     errors.check_errors();
 }

@@ -18,7 +18,7 @@ fn main() {
 
 fn run_file(source: &str) {
     //init
-    let errors = Rc::new(RefCell::new(throw::E::new()));
+    let errors = Rc::new(RefCell::new(throw::Error::new()));
     let mut scanner = lexical::Scanner::new(source, Rc::clone(&errors), Keywords::new());
 
     scanner.run();

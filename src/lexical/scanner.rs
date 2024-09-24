@@ -5,7 +5,7 @@ use crate::lexical::TokenType;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-use crate::throw::{self, E};
+use crate::throw::{self, Error};
 
 pub struct Scanner<'a> {
     source: String,
@@ -13,12 +13,12 @@ pub struct Scanner<'a> {
     start: usize,
     current: usize,
     line: usize,
-    throw: Rc<RefCell<E>>,
+    throw: Rc<RefCell<Error>>,
     keywords: Keywords<'a>,
 }
 
 impl<'a> Scanner<'a> {
-    pub fn new(source: &str, throw: Rc<RefCell<E>>, keywords: Keywords<'a>) -> Self {
+    pub fn new(source: &str, throw: Rc<RefCell<Error>>, keywords: Keywords<'a>) -> Self {
         Self {
             source: source.to_string(),
             throw: throw.clone(),
@@ -285,7 +285,7 @@ impl Default for Scanner<'_> {
             start: 0,
             current: 0,
             line: 1,
-            throw: Rc::new(RefCell::new(throw::E::default())),
+            throw: Rc::new(RefCell::new(throw::Error::default())),
             keywords: Keywords::new(),
         }
     }
