@@ -196,7 +196,6 @@ impl<'a> Scanner<'a> {
             '}' => self.add_token(TokenType::RightBrace, None),
             ',' => self.add_token(TokenType::Comma, None),
             '.' => self.add_token(TokenType::Dot, None),
-            '-' => self.add_token(TokenType::Minus, None),
             '+' => self.add_token(TokenType::Plus, None),
             ';' => self.add_token(TokenType::Semicolon, None),
             '*' => self.add_token(TokenType::Star, None),
@@ -234,15 +233,38 @@ impl<'a> Scanner<'a> {
                 };
                 self.add_token(token_type, None);
             }
+            '-' => {
+                // check for comments
+                let token_type = if self.match_token('>') {
+                    TokenType::ReturnType
+                } else {
+                    TokenType::Minus
+                };
+                self.add_token(token_type, None);
+            }
             '/' => {
                 // check for comments
                 if self.match_token('/') {
+                    // Single-line comment
                     while self.peek() != '\n' && !self.is_at_end() {
+                        self.advance();
+                    }
+                } else if self.match_token('*') {
+                    // Multi-line comment
+                    while !self.is_at_end() {
+                        if self.peek() == '*' && self.peek_next() == '/' {
+                            self.advance(); // consume '*'
+                            self.advance(); // consume '/'
+                            break;
+                        }
+                        if self.peek() == '\n' {
+                            self.line += 1;
+                        }
                         self.advance();
                     }
                 } else {
                     self.add_token(TokenType::Slash, None);
-                };
+                }
             }
 
             // string literal

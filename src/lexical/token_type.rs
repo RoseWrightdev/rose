@@ -25,6 +25,7 @@ pub enum TokenType {
     GreaterEqual,
     Less,
     LessEqual,
+    ReturnType,
 
     // Literals.
     Identifier,
@@ -36,7 +37,7 @@ pub enum TokenType {
     Class,
     Else,
     False,
-    Fun,
+    Fn,
     For,
     If,
     Nil,

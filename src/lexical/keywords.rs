@@ -23,7 +23,7 @@ impl<'a> Default for Keywords<'a> {
         hashmap.insert("else", TokenType::Else);
         hashmap.insert("false", TokenType::False);
         hashmap.insert("for", TokenType::For);
-        hashmap.insert("fun", TokenType::Fun);
+        hashmap.insert("fn", TokenType::Fn);
         hashmap.insert("if", TokenType::If);
         hashmap.insert("nil", TokenType::Nil);
         hashmap.insert("or", TokenType::Or);
