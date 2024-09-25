@@ -1,0 +1,40 @@
+# Config
+@server.rest @sql.postgress
+fn main() {
+    @server.port = localhost:3000
+    @server.allowcors = true
+    @sql.connection_string("connection_string")
+}
+
+# Schema
+@sql.parse
+struct TodoItem {
+    isComplete: bool,
+    textContent: string.max(64).min(1),
+    priority: num.max(10).min(1),
+}
+
+@get
+async fn get_items("/get_items") -> Statuscode, ?TodoItem {
+    let todo: Result(TodoItem) = await @sql.dbpool.query("SELECT * FROM todolist")
+    match todo {
+        Ok(todo) => retrun Statuscode::200, todo.json();
+        Err(todo) => return Statuscode::404;
+    }
+}
+
+@post
+async fn post_item("/get_items", todo_json: @post.body) -> Statuscode {
+
+}
+
+@put
+async fn put_item("/get_items") -> Statuscode {
+
+}
+
+@delete
+async fn post_item("/get_items") -> Statuscode {
+
+}
+

@@ -199,6 +199,10 @@ impl<'a> Scanner<'a> {
             '+' => self.add_token(TokenType::Plus, None),
             ';' => self.add_token(TokenType::Semicolon, None),
             '*' => self.add_token(TokenType::Star, None),
+            '@' => self.add_token(TokenType::Annotation, None),
+            '#' => self.add_token(TokenType::Document, None),
+            ':' => self.add_token(TokenType::Colon, None),
+            '?' => self.add_token(TokenType::Question, None),
 
             //double digit tokens
             '!' => {

@@ -15,6 +15,11 @@ pub enum TokenType {
     Semicolon,
     Slash,
     Star,
+    Annotation,
+    Document,
+    Colon,
+    Question,
+
 
     // One or two character tokens.
     Bang,
@@ -37,7 +42,7 @@ pub enum TokenType {
     Class,
     Else,
     False,
-    Fn,
+    Function,
     For,
     If,
     Nil,
@@ -49,6 +54,9 @@ pub enum TokenType {
     True,
     Var,
     While,
+    In,
+    Enum,
+    Struct,
 
     #[default]
     EndOfFile,
