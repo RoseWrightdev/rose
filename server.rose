@@ -1,4 +1,3 @@
-# Config
 @server.rest @sql.postgress
 fn main() {
     @server.port = localhost:3000
@@ -6,7 +5,6 @@ fn main() {
     @sql.connection_string("connection_string")
 }
 
-# Schema
 @sql.parse
 struct TodoItem {
     isComplete: bool,
@@ -18,23 +16,16 @@ struct TodoItem {
 async fn get_items("/get_items") -> Statuscode, ?TodoItem {
     let todo: Result(TodoItem) = await @sql.dbpool.query("SELECT * FROM todolist")
     match todo {
-        Ok(todo) => retrun Statuscode::200, todo.json();
-        Err(todo) => return Statuscode::404;
+        Ok(todo) => retrun Statuscode::200, todo.json(),
+        Err(todo) => return Statuscode::404,
     }
 }
 
 @post
-async fn post_item("/get_items", todo_json: @post.body) -> Statuscode {
-
+async fn post_item("/get_items", content: @post.body) -> Statuscode {
+    let res = await @sql.dbpool.query("INSERT INTO todolist ($1)", TodoItem.parse(content))
+    match res {
+        Ok(res) => Statuscode::200,
+        Err(res) => Statuscode::400
+    }    
 }
-
-@put
-async fn put_item("/get_items") -> Statuscode {
-
-}
-
-@delete
-async fn post_item("/get_items") -> Statuscode {
-
-}
-
