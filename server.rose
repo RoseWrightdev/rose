@@ -1,4 +1,4 @@
-@server.rest @sql.postgress
+@server.rest @sql.postgress null
 fn main() {
     @server.port = localhost:3000
     @server.allowcors = true

@@ -19,18 +19,15 @@ impl<'a> Default for Keywords<'a> {
     fn default() -> Self {
         let mut hashmap: HashMap<&str, TokenType> = HashMap::new();
         hashmap.insert("&&", TokenType::And);
-        hashmap.insert("class", TokenType::Class);
         hashmap.insert("else", TokenType::Else);
         hashmap.insert("false", TokenType::False);
         hashmap.insert("for", TokenType::For);
         hashmap.insert("fn", TokenType::Function);
         hashmap.insert("if", TokenType::If);
-        hashmap.insert("null", TokenType::Nil);
+        hashmap.insert("null", TokenType::Null);
         hashmap.insert("||", TokenType::Or);
         hashmap.insert("print", TokenType::Print);
         hashmap.insert("return", TokenType::Return);
-        hashmap.insert("super", TokenType::Super);
-        hashmap.insert("this", TokenType::This);
         hashmap.insert("true", TokenType::True);
         hashmap.insert("let", TokenType::Var);
         hashmap.insert("while", TokenType::While);
