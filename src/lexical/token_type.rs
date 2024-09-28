@@ -54,6 +54,7 @@ pub enum TokenType {
     In,
     Enum,
     Struct,
+    Match,
 
     #[default]
     EndOfFile,

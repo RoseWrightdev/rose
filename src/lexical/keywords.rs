@@ -34,6 +34,8 @@ impl<'a> Default for Keywords<'a> {
         hashmap.insert("in", TokenType::In);
         hashmap.insert("enum", TokenType::Enum);
         hashmap.insert("struct", TokenType::Struct);
+        hashmap.insert("match", TokenType::Match);
+
         Self { hashmap }
     }
 }
