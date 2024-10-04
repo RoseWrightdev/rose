@@ -2,6 +2,7 @@ use lexical::Keywords;
 use std::{cell::RefCell, env, fs, rc::Rc};
 mod lexical;
 mod throw;
+mod abstract_syntax_tree;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -26,4 +27,7 @@ fn run_file(source: &str) {
 
     // Check for errors after running the scanner
     throw::check_errors(&errors.borrow());
+
+    //ast
+    abstract_syntax_tree::ast::check_ast();
 }
