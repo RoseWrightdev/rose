@@ -1,6 +1,6 @@
 #[allow(dead_code)]
 pub mod ast {
-    pub fn check_ast() {
+    pub fn print() {
         let expr = Expression::Equality(Box::new(Equality::Comparison(Box::new(
             Comparison::Term(Box::new(Term::Binary(
                 Box::new(Factor::Unary(Box::new(Unary::Primary(Box::new(

@@ -3,6 +3,7 @@ use std::{cell::RefCell, env, fs, rc::Rc};
 mod lexical;
 mod throw;
 mod abstract_syntax_tree;
+mod parse;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -21,13 +22,13 @@ fn run_file(source: &str) {
     //init
     let errors = Rc::new(RefCell::new(throw::Error::new()));
     let mut scanner = lexical::Scanner::new(source, Rc::clone(&errors), Keywords::new());
-
-    scanner.run();
-    scanner.print();
+    let tokens = scanner.run(false);
 
     // Check for errors after running the scanner
     throw::check_errors(&errors.borrow());
 
     //ast
-    abstract_syntax_tree::ast::check_ast();
+    abstract_syntax_tree::ast::print();
+
+    parse::Parser::new(tokens.to_vec());
 }

@@ -27,11 +27,15 @@ impl<'a> Scanner<'a> {
         }
     }
 
-    pub fn run(&mut self) {
+    pub fn run(&mut self, is_printed: bool) -> &Vec<Token> {
         self.scan_tokens();
+        if is_printed {
+            self.print();
+        }
+        &self.tokens
     }
 
-    pub fn print(&self) {
+    fn print(&self) {
         println!("\n");
         for t in &self.tokens {
             println!("{:?}", t);

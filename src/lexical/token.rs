@@ -2,6 +2,7 @@ use crate::lexical::AlphanumericLiteral;
 use crate::lexical::TokenType;
 use std::fmt;
 
+#[derive(Clone)]
 pub struct Token {
     token_type: TokenType,
     text: String,
