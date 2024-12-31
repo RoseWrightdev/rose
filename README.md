@@ -1,1 +1,36 @@
-A networking focused scripting language in developement
+A networking-focused scripting language in development
+
+```
+@server.rest @sql.postgress null
+fn main() {
+    @server.port = localhost:3000
+    @server.allowcors = true
+    @sql.connection_string("connection_string")
+}
+
+@sql.parse
+struct TodoItem {
+    isComplete: bool,
+    textContent: string.max(64).min(1),
+    priority: num.max(10).min(1),
+}
+
+@get
+async fn get_items("/get_items") -> Statuscode, ?TodoItem {
+    let todo: Result(TodoItem) = await @sql.dbpool.query("SELECT * FROM todolist")
+    match todo {
+        Ok(todo) => retrun Statuscode::200, todo.json(),
+        Err(todo) => return Statuscode::404,
+    }
+}
+
+@post
+async fn post_item("/get_items", content: @post.body) -> Statuscode {
+    let res = await @sql.dbpool.query("INSERT INTO todolist ($1)", TodoItem.parse(content))
+    match res {
+        Ok(res) => Statuscode::200,
+        Err(res) => Statuscode::400
+    }    
+}
+
+```
