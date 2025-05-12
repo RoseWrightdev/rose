@@ -1,6 +1,6 @@
 @server.rest @sql.postgress null
 fn main() {
-    @server.port = localhost:3000
+    @server.port = "3000"
     @server.allowcors = true
     @sql.connection_string("connection_string")
 }
@@ -21,6 +21,8 @@ async fn get_items("/get_items") -> Statuscode, ?TodoItem {
     }
 }
 
+# This is a markdown title for the function documentation 
+this is a paragrapch etc
 @post
 async fn post_item("/get_items", content: @post.body) -> Statuscode {
     let res = await @sql.dbpool.query("INSERT INTO todolist ($1)", TodoItem.parse(content))
